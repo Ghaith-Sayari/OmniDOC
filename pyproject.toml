@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "omnidoc-rag"
+version = "0.1.0"
+description = "Enterprise Multi-Format Retrieval-Augmented Generation System"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = ["rag", "llm", "document-ai", "retrieval", "enterprise"]
+
+dependencies = [
+    "llama-index-core>=0.10.0",
+    "llama-index-embeddings-huggingface>=0.2.0",
+    "llama-index-embeddings-openai>=0.1.0",
+    "qdrant-client>=1.9.0",
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=3.0.0",
+    "openai>=1.30.0",
+    "anthropic>=0.28.0",
+    "cohere>=5.0.0",
+    "pdfplumber>=0.11.0",
+    "python-docx>=1.1.0",
+    "python-pptx>=0.6.23",
+    "pandas>=2.2.0",
+    "openpyxl>=3.1.0",
+    "tabulate>=0.9.0",
+    "beautifulsoup4>=4.12.0",
+    "ragas>=0.1.9",
+    "datasets>=2.19.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
+    "typer[all]>=0.12.0",
+]
+
+[project.optional-dependencies]
+ocr = ["pytesseract>=0.3.10", "Pillow>=10.0.0"]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=5.0.0",
+    "httpx>=0.27.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+omnidoc = "main:app"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--cov=omnidoc --cov-report=term-missing"
